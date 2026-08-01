@@ -1,0 +1,4 @@
+interface:
+  display_name: "Context Relay"
+  short_description: "Save and resume AI work across sessions"
+  default_prompt: "Use $context-relay to checkpoint this work or resume it safely from an existing checkpoint."

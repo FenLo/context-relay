@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://context-relay.dev/schema/event-v1.json",
+  "title": "Context Relay Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "sessionId",
+    "sequence",
+    "timestamp",
+    "type",
+    "source",
+    "status",
+    "summary",
+    "previousHash",
+    "hash"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "format": "uuid" },
+    "sessionId": { "type": "string", "format": "uuid" },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "type": {
+      "enum": [
+        "session-started",
+        "session-completed",
+        "objective-updated",
+        "user-message",
+        "assistant-message",
+        "decision",
+        "constraint",
+        "action",
+        "finding",
+        "failed-attempt",
+        "next-step",
+        "blocker",
+        "blocker-resolved",
+        "note",
+        "command-started",
+        "command-result"
+      ]
+    },
+    "source": { "enum": ["user", "assistant", "tool", "system"] },
+    "status": {
+      "enum": ["info", "proposed", "applied", "verified", "failed", "blocked"]
+    },
+    "summary": { "type": "string", "minLength": 1 },
+    "details": { "type": "string" },
+    "evidence": { "type": "object" },
+    "references": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    },
+    "previousHash": { "type": ["string", "null"] },
+    "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}
