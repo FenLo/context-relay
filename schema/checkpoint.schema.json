@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://context-relay.dev/schema/checkpoint-v1.json",
+  "title": "Context Relay Checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "sessionId",
+    "objective",
+    "status",
+    "createdAt",
+    "checkpointedAt",
+    "eventLog",
+    "state",
+    "workspace",
+    "environment"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "kind": { "const": "context-relay-checkpoint" },
+    "sessionId": { "type": "string", "format": "uuid" },
+    "objective": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["in_progress", "completed"] },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "checkpointedAt": { "type": "string", "format": "date-time" },
+    "eventLog": {
+      "type": "object",
+      "required": ["count", "lastSequence", "lastHash", "fileHash"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0 },
+        "lastSequence": { "type": "integer", "minimum": 0 },
+        "lastHash": { "type": ["string", "null"] },
+        "fileHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "state": {
+      "type": "object",
+      "required": [
+        "userMessages",
+        "assistantMessages",
+        "decisions",
+        "constraints",
+        "verified",
+        "applied",
+        "findings",
+        "failedAttempts",
+        "blockers",
+        "nextSteps",
+        "notes",
+        "commands"
+      ]
+    },
+    "workspace": { "type": "object" },
+    "environment": { "type": "object" }
+  }
+}

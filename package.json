@@ -1,0 +1,34 @@
+{
+  "name": "context-relay",
+  "version": "0.1.0",
+  "description": "Portable, evidence-backed checkpoints for continuing AI-assisted work across sessions and models.",
+  "type": "module",
+  "bin": {
+    "context-relay": "./bin/context-relay.mjs",
+    "relay": "./bin/context-relay.mjs"
+  },
+  "files": [
+    "bin/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "validate:skill": "node ./scripts/validate-skill.mjs",
+    "test": "node --test",
+    "check": "npm run build && npm run validate:skill && node --check ./src/context-relay.mjs && node --test",
+    "demo": "node ./examples/demo.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "ai",
+    "handoff",
+    "checkpoint",
+    "coding-agent",
+    "context",
+    "cli"
+  ],
+  "license": "MIT"
+}
